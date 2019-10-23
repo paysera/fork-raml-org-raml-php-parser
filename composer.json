@@ -44,7 +44,7 @@
     "friendsofphp/php-cs-fixer": "*",
     "jakub-onderka/php-parallel-lint": "^1.0",
     "phpstan/phpstan": "^0.10.2",
-    "phpunit/phpunit": "4.*",
+    "phpunit/phpunit": "4.* || 7.*",
     "satooshi/php-coveralls": "~2.0",
     "sensiolabs/security-checker": "^4.1"
   },
