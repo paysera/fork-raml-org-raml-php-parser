@@ -133,4 +133,21 @@ class MethodTest extends PHPUnit_Framework_TestCase
             'HTTPS',
         ], $method->getProtocols());
     }
+
+    /** @test */
+    public function shouldParseAnnotations()
+    {
+        $apiDefinition = new \Raml\ApiDefinition('The title');
+
+        $method = \Raml\Method::createFromArray('get', [
+            '(annotation1)' => 'Something',
+            '(my_annotation)' => null,
+            'something_else' => 'asd',
+        ], $apiDefinition);
+
+        $this->assertSame([
+            '(annotation1)' => 'Something',
+            '(my_annotation)' => null,
+        ], $method->getAnnotations());
+    }
 }

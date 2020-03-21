@@ -102,6 +102,11 @@ class Method implements ArrayInstantiationInterface, MessageSchemaInterface
      */
     private $traits = [];
 
+    /**
+     * @var array
+     */
+    private $annotations = [];
+
     // ---
 
     /**
@@ -216,6 +221,12 @@ class Method implements ArrayInstantiationInterface, MessageSchemaInterface
         if (isset($data['is'])) {
             foreach ((array) $data['is'] as $traitName) {
                 $method->addTrait(TraitCollection::getInstance()->getTraitByName($traitName));
+            }
+        }
+
+        foreach ($data as $key => $value) {
+            if (substr($key, 0, 1) === '(' && substr($key, -1, 1) === ')') {
+                $method->annotations[$key] = $value;
             }
         }
 
@@ -537,5 +548,13 @@ class Method implements ArrayInstantiationInterface, MessageSchemaInterface
         $this->traits[] = $trait;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAnnotations()
+    {
+        return $this->annotations;
     }
 }
